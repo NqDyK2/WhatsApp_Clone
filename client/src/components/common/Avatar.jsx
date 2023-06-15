@@ -18,7 +18,10 @@ function Avatar({ type, image, setImage }) {
   };
 
   const contextMenuOptions = [
-    {name: "Take Photo", callback: () => {}}
+    {name: "Take Photo", callback: () => {}},
+    {name: "Choose From Library", callback: () => {}},
+    {name: "Upload Photo", callback: () => {}},
+    {name: "Remove Photo", callback: () => {}},
   ]
 
   return (
