@@ -21,7 +21,7 @@ function login() {
   }, [userInfo, newUser]);
 
   const handleLogin = async () => {
-    const provider = new GoogleAuthProvider(); 
+    const provider = new GoogleAuthProvider();
     const {
       user: { displayName: name, email, photoURL: profileImage },
     } = await signInWithPopup(firebaseAuth, provider);
@@ -40,20 +40,20 @@ function login() {
             },
           });
           router.push("/onboarding");
+        } else {
+          const { id, name, email, profilePicture: profileImage, status } = data.data;
+          dispatch({
+            type: reducerCases.SET_USER_INFO,
+            userInfo: {
+              id,
+              name,
+              email,
+              profileImage,
+              status,
+            },
+          });
+          router.push("/");
         }
-      } else {
-        const { id, name, email, profilePicture: profileImage, status } = data;
-        dispatch({
-          type: reducerCases.SET_USER_INFO,
-          userInfo: {
-            id,
-            name,
-            email,
-            profileImage,
-            status,
-          },
-        });
-        router.push("/");
       }
     } catch (err) {
       console.log(err);

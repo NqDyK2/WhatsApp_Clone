@@ -36,7 +36,7 @@ function onboarding() {
           dispatch({
             type: reducerCases.SET_USER_INFO,
             userInfo: {
-              id: data.id,
+              id: data.user.id,
               name,
               email,
               profileImage: image,
@@ -53,7 +53,6 @@ function onboarding() {
 
   const validateDetails = () => {
     if (name.length < 3) {
-      console.log("false?");
       return false;
     }
     return true;
