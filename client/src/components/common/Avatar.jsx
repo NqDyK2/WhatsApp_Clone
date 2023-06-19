@@ -7,7 +7,6 @@ import PhotoLibrary from "./PhotoLibrary";
 import CapturePhoto from "./CapturePhoto";
 
 function Avatar({ type, image, setImage }) {
-  console.log(image);
   const [hover, setHover] = useState(false);
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
   const [showCapturePhoto, setShowCapturePhoto] = useState(false);
