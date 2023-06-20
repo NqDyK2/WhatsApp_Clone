@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs";
 import { ImAttachment } from "react-icons/im";
 import { MdSend } from "react-icons/md";
@@ -7,10 +7,38 @@ import { useStateProvider } from "@/context/StateContext";
 import axios from "axios";
 import { ADD_MESSAGE_ROUTE } from "@/utils/ApiRoutes";
 import { reducerCases } from "@/context/constants";
+import EmojiPicker from "emoji-picker-react";
 
 function MessageBar() {
   const [{ userInfo, currentChatUser, socket }, dispatch] = useStateProvider();
   const [message, setMessage] = useState("");
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (event.target.id !== "emoji-open") {
+        if (
+          emojiPickerRef.current &&
+          !emojiPickerRef.current.contains(event.target)
+        ) {
+          setShowEmojiPicker(false);
+        }
+      }
+    };
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
+  const handleEmojiModal = () => {
+    setShowEmojiPicker(!showEmojiPicker);
+  };
+
+  const handleEmojiClick = (emoji) => {
+    setMessage((prevMessage) => (prevMessage += emoji.emoji));
+  };
   const sendMessage = async () => {
     try {
       const { data } = await axios.post(ADD_MESSAGE_ROUTE, {
@@ -29,7 +57,7 @@ function MessageBar() {
           ...data.message,
         },
         fromSelf: true,
-      })
+      });
       setMessage("");
     } catch (error) {
       console.log(error);
@@ -43,7 +71,17 @@ function MessageBar() {
           <BsEmojiSmile
             className="text-panel-header-icon cursor-pointer text-xl"
             title="Emoji"
+            id="emoji-open"
+            onClick={handleEmojiModal}
           />
+          {showEmojiPicker && (
+            <div
+              className="absolute bottom-24 left-16 z-40"
+              ref={emojiPickerRef}
+            >
+              <EmojiPicker onEmojiClick={handleEmojiClick} theme="dark" />
+            </div>
+          )}
           <ImAttachment
             className="text-panel-header-icon cursor-pointer text-xl"
             title="Attach File"
