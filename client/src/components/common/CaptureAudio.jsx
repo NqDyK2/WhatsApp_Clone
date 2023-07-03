@@ -149,7 +149,7 @@ const CaptureAudio = ({ hide }) => {
   const sendRecording = async () => {
     try {
       const formData = new FormData();
-      formData.append("audio", recordedAudio);
+      formData.append("audio", renderedAudio);
       const response = await axios.post(ADD_AUDIO_MESSAGE_ROUTE, formData, {
         headers: {
           "Content-Type": "multipart/form-data",

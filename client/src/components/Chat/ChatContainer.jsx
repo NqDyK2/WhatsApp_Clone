@@ -53,7 +53,9 @@ function ChatContainer() {
                   {message.type === "image" && (
                     <ImageMessage message={message} />
                   )}
-                  {message.type === "audio" && <VoiceMessage message={message} />}
+                  {message.type === "audio" && (
+                    <VoiceMessage message={message} />
+                  )}
                 </div>
               );
             })}
