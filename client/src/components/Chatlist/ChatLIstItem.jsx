@@ -6,7 +6,7 @@ import { calculateTime } from "@/utils/CalculateTime";
 import MessageStatus from "../common/MessageStatus";
 import { FaCamera, FaMicrophone } from "react-icons/fa";
 
-function ChatListItem({ data, isContactsPage = false }) {
+function ChatListItem({ data, isContactsPage }) {
   const [{ userInfo, currentChatUser }, dispatch] = useStateProvider();
   const handleContactClick = () => {
     if (!isContactsPage) {
@@ -50,7 +50,6 @@ function ChatListItem({ data, isContactsPage = false }) {
                     : "text-icon-green"
                 } text-sm`}
               >
-                {" "}
                 {calculateTime(data.createdAt)}
               </span>
             </div>
