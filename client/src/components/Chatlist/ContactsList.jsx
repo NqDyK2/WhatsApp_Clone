@@ -72,9 +72,9 @@ function ContactsList() {
         </div>
         {Object.entries(searchContacts).map(([initialLetter, userList]) => {
           return (
-            userList.lengh > 0 && (
+            userList && (
               <div key={Date.now() + initialLetter}>
-                {userList.length && (
+                {userList.length > 0 && (
                   <div className="text-teal-light pl-10 py-5">
                     {initialLetter}
                   </div>
