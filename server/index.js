@@ -78,4 +78,14 @@ io.on("connection", (socket) => {
             socket.to(sendUserSocket).emit("video-call-rejected");
         }
     });
+
+    socket.on("accept-incoming-call", ({id}) => {
+        const sendUserSocket = onlineUsers.get(id);
+        socket.to(sendUserSocket).emit("accept-call")
+    })
+    
+    socket.on("accept-incoming-call", ({id}) => {
+        const sendUserSocket = onlineUsers.get(id);
+        socket.to(sendUserSocket).emit("accept-call")
+    })
 })
