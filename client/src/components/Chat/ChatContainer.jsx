@@ -22,7 +22,7 @@ function ChatContainer() {
                 <div
                   key={message.id}
                   className={`flex ${
-                    message.senderId === currentChatUser.id
+                    message.senderId === currentChatUser?.id
                       ? "justify-start"
                       : "justify-end"
                   }`}
@@ -30,7 +30,7 @@ function ChatContainer() {
                   {message.type === "text" && (
                     <div
                       className={`text-white px-2 py-[5px] text-sm rounded-md flex gap-2 items-end max-w-[45%] ${
-                        message.senderId === currentChatUser.id
+                        message.senderId === currentChatUser?.id
                           ? "bg-incoming-background"
                           : "bg-outgoing-background"
                       }`}

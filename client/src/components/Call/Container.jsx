@@ -26,6 +26,8 @@ function Container({ data }) {
 
   useEffect(() => {
     const getToken = async () => {
+      const genToken = await axios.get(`${GET_CALL_TOKEN}/${userInfo.id}`)
+      console.log(genToken);
       try {
         const {
           data: { token: returnedToken },
